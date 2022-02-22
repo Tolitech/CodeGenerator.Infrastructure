@@ -10,20 +10,13 @@ namespace Tolitech.CodeGenerator.Infrastructure.Services
 {
     public class EmailService : IEmailService
     {
-        private readonly ILogger _logger;
-
-        public EmailService(ILogger logger)
-        {
-            _logger = logger;
-        }
-
         /// <summary>
         /// Get template.
         /// </summary>
         /// <param name="filePath">file path</param>
         /// <param name="parameters">parameters</param>
         /// <returns>template</returns>
-        public string GetTemplate(string filePath, params string[] parameters)
+        public string GetTemplate(string? filePath, params string?[] parameters)
         {
             string template = "";
 
@@ -32,9 +25,10 @@ namespace Tolitech.CodeGenerator.Infrastructure.Services
                 template = File.ReadAllText(filePath, Encoding.Default);
 
                 int index = 0;
-                foreach (string p in parameters)
+                foreach (string? p in parameters)
                 {
-                    template = template.Replace("{" + index + "}", p);
+                    string parameter = p ?? "";
+                    template = template.Replace("{" + index + "}", parameter);
                     index++;
                 }
             }
@@ -142,8 +136,6 @@ namespace Tolitech.CodeGenerator.Infrastructure.Services
             {
                 if (e.Error != null)
                 {
-                    _logger.LogError(e.Error.ToString());
-
                     Console.WriteLine(e.Error.ToString());
                 }
             }
