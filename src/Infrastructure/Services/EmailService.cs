@@ -3,7 +3,6 @@ using System.ComponentModel;
 using System.Net;
 using System.Net.Mail;
 using System.Text;
-using Microsoft.Extensions.Logging;
 using Tolitech.CodeGenerator.Domain.Services;
 
 namespace Tolitech.CodeGenerator.Infrastructure.Services
@@ -16,7 +15,7 @@ namespace Tolitech.CodeGenerator.Infrastructure.Services
         /// <param name="filePath">file path</param>
         /// <param name="parameters">parameters</param>
         /// <returns>template</returns>
-        public string GetTemplate(string? filePath, params string?[] parameters)
+        public string GetTemplate(string filePath, params string?[] parameters)
         {
             string template = "";
 
